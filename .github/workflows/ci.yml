@@ -1,0 +1,99 @@
+name: ci
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      # html-validate is HTML5 aware and runs straight from npx, so nothing is
+      # vendored into the repo. Config lives in .htmlvalidate.json.
+      - name: Validate HTML
+        run: npx --yes html-validate@9 index.html
+
+      # The page must stay droppable into any bucket: no CDN, no remote fonts,
+      # no remote images. Only anchor hrefs may point off site.
+      - name: Assert the page is self contained
+        run: |
+          if grep -nEi 'src="https?://|<link[^>]+href="https?://|@import|<script[^>]+src=' index.html; then
+            echo "::error::External asset reference found. The page must stay self contained."
+            exit 1
+          fi
+
+      - name: Assert assets and CNAME are present
+        run: |
+          test -f index.html
+          test -f screenshot.png
+          test -f screenshot.webp
+          test -f CNAME
+          grep -qx 'wordbridgeaac.com' CNAME
+
+      # Fails once the store links are filled in but the placeholder markers are
+      # left behind, and fails while a badge still points at nothing.
+      - name: Report placeholder store links
+        run: |
+          if grep -q 'aria-disabled="true"' index.html; then
+            echo "::notice::Store badges are still placeholders (href=\"#\")."
+          fi
+
+  # Deploys to GitHub Pages. Requires the repo to be public (or GitHub Pages on a
+  # paid plan) and Settings > Pages > Source set to "GitHub Actions".
+  #
+  # ALTERNATIVE: if this ships from a Scaleway Object Storage bucket instead,
+  # drop this whole job and replace it with a sync step, roughly:
+  #
+  #   - uses: scaleway/action-scw@v0   (or plain awscli against the S3 endpoint)
+  #   - run: |
+  #       aws s3 sync . s3://$BUCKET/ --delete \
+  #         --endpoint-url https://s3.$SCW_REGION.scw.cloud \
+  #         --exclude '.git/*' --exclude '.github/*' --exclude '.htmlvalidate.json'
+  #
+  # with SCW_ACCESS_KEY / SCW_SECRET_KEY in repo secrets. The bucket needs
+  # website hosting enabled with index.html as the index document, and the
+  # domain terminated at a CDN or load balancer for TLS. CNAME is a GitHub Pages
+  # convention and is inert on Scaleway, so point wordbridgeaac.com at the
+  # bucket endpoint in DNS instead. A Scaleway bucket also means the repo can
+  # stay private.
+  deploy:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/configure-pages@v5
+
+      - name: Stage site
+        run: |
+          mkdir -p _site
+          cp index.html screenshot.png screenshot.webp CNAME _site/
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+      - id: deployment
+        uses: actions/deploy-pages@v4

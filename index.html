@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>wordbridge, a free and open source AAC app</title>
+<meta name="description" content="A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="wordbridge">
+<meta property="og:description" content="A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there.">
+<meta property="og:url" content="https://wordbridgeaac.com/">
+<meta property="og:image" content="https://wordbridgeaac.com/screenshot.png">
+<meta property="og:image:alt" content="The wordbridge talking grid on a tablet.">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234a3d8f'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='6' width='8' height='8' rx='1.5'/%3E%3Crect x='18' y='6' width='8' height='8' rx='1.5'/%3E%3Crect x='6' y='18' width='8' height='8' rx='1.5'/%3E%3Crect x='18' y='18' width='8' height='8' rx='1.5' fill-opacity='.35'/%3E%3C/g%3E%3C/svg%3E">
+
+<style>
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f6f6f3;
+  --fg: #16161a;
+  --fg-muted: #52525e;
+  --rule: #e0e0da;
+  --accent: #4a3d8f;
+  --shadow: 0 1px 2px rgba(20, 20, 30, .06), 0 18px 48px rgba(20, 20, 30, .14);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101014;
+    --bg-alt: #191920;
+    --fg: #ececee;
+    --fg-muted: #a8a8b4;
+    --rule: #2c2c35;
+    --accent: #b3a6ff;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 18px 48px rgba(0, 0, 0, .55);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: .6rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  z-index: 10;
+}
+.skip:focus { left: .5rem; top: .5rem; }
+
+/* One screen. `dvh` so a mobile browser's collapsing toolbar does not crop
+   the badges, which are the only thing on the page that has to be reachable. */
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 2.2vh, 2rem) clamp(1.25rem, 4vw, 3.5rem);
+  gap: clamp(.75rem, 2vh, 1.75rem);
+}
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  flex: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem);
+  font-weight: 640;
+  letter-spacing: -.015em;
+}
+
+.mark svg { width: 1.35em; height: 1.35em; flex: none; }
+
+.hero {
+  flex: 1 1 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  align-content: center;
+  gap: clamp(1.25rem, 3.5vh, 2.5rem);
+  min-height: 0;
+}
+
+@media (min-width: 62rem) {
+  .hero {
+    grid-template-columns: minmax(20rem, 27rem) minmax(0, 1fr);
+    align-items: center;
+    gap: clamp(2rem, 5vw, 4.5rem);
+  }
+}
+
+.pitch { min-width: 0; }
+
+h1 {
+  margin: 0 0 clamp(.6rem, 1.6vh, 1rem);
+  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -.028em;
+  font-weight: 680;
+  text-wrap: balance;
+}
+
+.thesis {
+  margin: 0;
+  font-size: clamp(1rem, .95rem + .35vw, 1.2rem);
+  color: var(--fg-muted);
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+.shot {
+  min-width: 0;
+  min-height: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: min(58dvh, 34rem);
+  object-fit: contain;
+  border-radius: clamp(6px, 1vw, 12px);
+  border: 1px solid var(--rule);
+  box-shadow: var(--shadow);
+  background: var(--bg-alt);
+}
+
+.badges {
+  list-style: none;
+  margin: clamp(1rem, 2.6vh, 1.75rem) 0 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .75rem;
+}
+
+.badge { display: block; border-radius: 9px; }
+.badge svg { display: block; width: clamp(8.5rem, 11vw, 10.5rem); height: auto; }
+.badge:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.colophon {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.1rem;
+  align-items: baseline;
+  padding-top: clamp(.6rem, 1.6vh, 1.1rem);
+  border-top: 1px solid var(--rule);
+  font-size: .82rem;
+  color: var(--fg-muted);
+}
+
+.colophon p { margin: 0; }
+.colophon a { color: inherit; text-underline-offset: 2px; }
+.colophon a:hover { color: var(--fg); }
+.colophon a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* A short landscape window cannot hold a masthead image and stay legible, so
+   below this the page scrolls rather than shrinking the screenshot to nothing. */
+@media (max-height: 30rem) and (min-width: 62rem) {
+  .page { min-height: 0; }
+  .shot img { max-height: none; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+
+  <header class="masthead">
+    <span class="mark">
+      <svg viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="6" style="fill: var(--accent)"/>
+        <g fill="#fff">
+          <rect x="6" y="6" width="8" height="8" rx="1.5"/>
+          <rect x="18" y="6" width="8" height="8" rx="1.5"/>
+          <rect x="6" y="18" width="8" height="8" rx="1.5"/>
+          <rect x="18" y="18" width="8" height="8" rx="1.5" fill-opacity=".35"/>
+        </g>
+      </svg>
+      wordbridge
+    </span>
+  </header>
+
+  <main class="hero" id="main">
+
+    <div class="pitch">
+      <h1>Every word keeps its place</h1>
+      <p class="thesis">A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there, so reaching a word becomes a movement rather than a search.</p>
+
+      <ul class="badges">
+        <li>
+          <!-- Google Play listing URL goes in href -->
+          <a class="badge" href="#" aria-label="Get it on Google Play">
+            <svg viewBox="0 0 180 60" role="img" aria-hidden="true" focusable="false">
+              <rect x=".75" y=".75" width="178.5" height="58.5" rx="9" fill="#000000" stroke="#a6a6a6" stroke-width="1.5"/>
+              <g transform="translate(10.196 14.79) scale(1.268)">
+                <path fill="#00a0ff" d="M3.609 1.814L13.792 12 3.61 22.186a1.5 1.5 0 0 1-.61-1.202V3.016c0-.474.235-.897.61-1.202z"/>
+                <path fill="#00e676" d="M17.5 8.315L4.822 1.747a.988.988 0 0 0-1.213.067L13.792 12l3.708-3.685z"/>
+                <path fill="#ff3a44" d="M17.5 15.685L13.792 12 3.609 22.186c.32.276.83.29 1.213.067L17.5 15.685z"/>
+                <path fill="#ffce00" d="M17.5 15.685l-3.708-3.685 3.708-3.685 4.316 2.454c.85.483.85 1.679 0 2.162L17.5 15.685z"/>
+              </g>
+              <text x="46" y="23.5" fill="#ffffff" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="9.5" textLength="72" lengthAdjust="spacingAndGlyphs">GET IT ON</text>
+              <text x="46" y="43.5" fill="#ffffff" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="21" font-weight="500" textLength="104" lengthAdjust="spacingAndGlyphs">Google Play</text>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <!-- App Store listing URL goes in href -->
+          <a class="badge" href="#" aria-label="Download on the App Store">
+            <svg viewBox="0 0 180 60" role="img" aria-hidden="true" focusable="false">
+              <rect x=".75" y=".75" width="178.5" height="58.5" rx="9" fill="#000000" stroke="#a6a6a6" stroke-width="1.5"/>
+              <g transform="translate(13.77 15.14) scale(.058)" fill="#ffffff">
+                <path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9z"/>
+                <path d="M262.1 104.5c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/>
+              </g>
+              <text x="46" y="23.5" fill="#ffffff" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="9.5" textLength="72" lengthAdjust="spacingAndGlyphs">Download on the</text>
+              <text x="46" y="43.5" fill="#ffffff" font-family="system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="21" font-weight="500" textLength="104" lengthAdjust="spacingAndGlyphs">App Store</text>
+            </svg>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="shot">
+      <picture>
+        <source srcset="screenshot.webp" type="image/webp">
+        <img src="screenshot.png" width="1600" height="1027" decoding="async" fetchpriority="high"
+             alt="The wordbridge talking grid on a tablet. Colored cells each hold one word and one picture, grouped under headings reading who, which one, doing, word endings, joining words, things, where, and yes, no and more. A strip of predicted words sits above the grid, and a number of cells sit empty, held for words that go in later.">
+      </picture>
+    </div>
+
+  </main>
+
+  <footer class="colophon">
+    <p>Free and open source under the MIT license.</p>
+    <p>Bundled picture sets carry their own terms, credited inside the app.</p>
+    <p><a href="https://github.com/sheyaln/wordbridge-flutter">Source on GitHub</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>

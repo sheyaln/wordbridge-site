@@ -41,6 +41,8 @@ jobs:
           test -f index.html
           test -f screenshot.png
           test -f screenshot.webp
+          test -f appstore-badge.svg
+          test -f googleplay-badge.png
           test -f CNAME
           grep -qx 'wordbridgeaac.com' CNAME
 
@@ -89,7 +91,7 @@ jobs:
       - name: Stage site
         run: |
           mkdir -p _site
-          cp index.html screenshot.png screenshot.webp CNAME _site/
+          cp index.html screenshot.png screenshot.webp appstore-badge.svg googleplay-badge.png CNAME _site/
 
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -156,16 +156,24 @@ h1 {
   padding: 0;
   display: flex;
   flex-wrap: wrap;
+  align-items: flex-end;
   gap: .75rem;
 }
 
 /* Sized by height, not width, because the two official assets are cropped
    differently: Apple's SVG is trimmed to the badge, while Google's PNG carries
-   its required clear space inside the image (content is 168 of its 250 rows).
-   Scaling Google's by that ratio makes the two badges read the same size. */
+   its required clear space inside the image, 41px on every side of a 564x168
+   badge in a 646x250 canvas. Scaling Google's by 250/168 makes the two badges
+   read the same size, and the matching negative margin keeps the scaled clear
+   space out of the layout box, so both sit flush with the text column and share
+   a baseline instead of the PNG's padding shunting it down and right. The gap
+   still leaves more than the quarter-badge-height clear space Google asks for. */
 .badge { display: block; }
 .badge img { display: block; height: var(--badge-h); width: auto; }
-.badge-play img { height: calc(var(--badge-h) * 1.488); }
+.badge-play img {
+  height: calc(var(--badge-h) * 250 / 168);
+  margin: calc(var(--badge-h) * -41 / 168);
+}
 .badge:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 9px; }
 
 .colophon {

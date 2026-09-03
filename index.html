@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wordbridge AAC, a free and open source communication app</title>
-<meta name="description" content="Wordbridge AAC is a free, open source communication app built around a consistent grid. Words keep their place as vocabulary grows, so communication becomes about finding the right word, not learning where it moved.">
+<meta name="description" content="No two people communicate in exactly the same way. Wordbridge AAC is designed to adapt to the person using it, rather than asking the person to adapt to the app. Customize the layout, appearance, vocabulary, symbols, behavior, and voice to create a communication system that works for you.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wordbridge AAC">
-<meta property="og:description" content="Wordbridge AAC is a free, open source communication app built around a consistent grid. Words keep their place as vocabulary grows, so communication becomes about finding the right word, not learning where it moved.">
+<meta property="og:description" content="No two people communicate in exactly the same way. Wordbridge AAC is designed to adapt to the person using it, rather than asking the person to adapt to the app. Customize the layout, appearance, vocabulary, symbols, behavior, and voice to create a communication system that works for you.">
 <meta property="og:url" content="https://wordbridgeaac.com/">
 <meta property="og:image" content="https://wordbridgeaac.com/screenshot.png">
 <meta property="og:image:alt" content="The Wordbridge AAC talking grid on a tablet.">
@@ -69,6 +69,15 @@
 }
 
 .pitch { min-width: 0; }
+
+/* The paragraph after the lead. Same measure, so the two read as one
+   column rather than as a column and a caption. */
+.pitch-body {
+  margin: .8rem 0 0;
+  max-width: 34rem;
+  color: var(--fg-muted);
+  text-wrap: pretty;
+}
 
 .shot {
   min-width: 0;
@@ -152,8 +161,9 @@
   <main class="hero" id="main">
 
     <div class="pitch">
-      <h1>Speak with muscle memory</h1>
-      <p class="lead">Wordbridge AAC is a free, open source communication app built around a consistent grid. Words keep their place as vocabulary grows, so communication becomes about finding the right word, not learning where it moved.</p>
+      <h1>Built around the person</h1>
+      <p class="lead">No two people communicate in exactly the same way. Wordbridge AAC is designed to adapt to the person using it, rather than asking the person to adapt to the app.</p>
+      <p class="pitch-body">Customize the layout, appearance, vocabulary, symbols, behavior, and voice to create a communication system that works for you.</p>
       <p class="terms">Free. Open source. No subscription.</p>
 
       <ul class="badges">

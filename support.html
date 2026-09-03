@@ -29,6 +29,19 @@
   padding: clamp(1rem, 3vh, 2rem) 0;
 }
 
+/* Wide enough, the address and the note beside it rather than under it. The
+   page is four lines and an email; stacked, it leaves most of a desktop window
+   empty and reads as a page that failed to load the rest of itself. */
+@media (min-width: 56rem) {
+  .body {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 23rem);
+    align-content: center;
+    align-items: center;
+    column-gap: clamp(2.5rem, 6vw, 5rem);
+  }
+}
+
 /* The address is the whole page, so it is set as the largest thing on it and
    sized to wrap on a narrow screen rather than push the layout sideways. */
 .address {
@@ -80,7 +93,7 @@
 
 <a class="skip" href="#main">Skip to content</a>
 
-<div class="page">
+<div class="page document">
 
   <header class="masthead">
     <a class="mark" href="/">

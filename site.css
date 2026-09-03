@@ -96,38 +96,72 @@ h1 {
   text-wrap: pretty;
 }
 
-/* Long form pages. One column, measured for reading rather than for filling
-   the window, because these two are read start to finish and the rest of the
-   site is not. */
+/* A page that is read rather than scanned. The masthead, the text and the
+   colophon share one measure so nothing floats against an edge on a wide
+   screen. */
+.page.document {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+}
+
 .prose {
   flex: 1 1 auto;
   width: 100%;
-  max-width: 38rem;
-  padding: clamp(1.5rem, 5vh, 3.5rem) 0;
+  padding: clamp(1.25rem, 4vh, 2.5rem) 0;
 }
 
 .prose h1 { max-width: 20ch; }
 
-.prose > .lead { margin-bottom: clamp(1.75rem, 4vh, 2.75rem); }
+.prose > .lead { margin-bottom: clamp(1.5rem, 3.5vh, 2.25rem); }
+
+/* Each section is its own heading and its own text. Wide enough, the heading
+   moves into a rail beside the text and stays there while that section is
+   read: the width gets used for orientation instead of being left empty, and
+   the text keeps a measure somebody can actually read. */
+.prose section {
+  display: grid;
+  gap: .35rem;
+  margin-top: clamp(1.6rem, 4vh, 2.6rem);
+  padding-top: clamp(1.6rem, 4vh, 2.6rem);
+  border-top: 1px solid var(--rule);
+}
+
+@media (min-width: 56rem) {
+  .prose section {
+    grid-template-columns: minmax(0, 13rem) minmax(0, 38rem);
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+
+  .prose section h2 {
+    position: sticky;
+    top: clamp(1rem, 3vh, 2rem);
+  }
+}
 
 .prose h2 {
-  margin: clamp(2rem, 5vh, 3rem) 0 .65rem;
-  font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem);
+  margin: 0;
+  font-size: clamp(1.05rem, .95rem + .35vw, 1.25rem);
   font-weight: 660;
-  letter-spacing: -.015em;
-  line-height: 1.25;
+  letter-spacing: -.01em;
+  line-height: 1.3;
   text-wrap: balance;
+  color: var(--fg-muted);
 }
 
 .prose h3 {
-  margin: clamp(1.4rem, 3vh, 2rem) 0 .4rem;
+  margin: clamp(1.2rem, 2.5vh, 1.6rem) 0 .4rem;
   font-size: 1rem;
   font-weight: 640;
   letter-spacing: -.005em;
 }
 
+.prose h3:first-child { margin-top: 0; }
+
 .prose p, .prose li { text-wrap: pretty; }
 .prose p { margin: 0 0 .95rem; }
+.prose section > div > :last-child { margin-bottom: 0; }
 
 .prose ul {
   margin: 0 0 1.1rem;

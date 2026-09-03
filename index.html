@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Wordbridge AAC, a free and open source communication app</title>
-<meta name="description" content="A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there.">
+<meta name="description" content="Wordbridge AAC is a free, open source communication app built around a consistent grid. Words keep their place as vocabulary grows, so communication becomes about finding the right word, not learning where it moved.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="Wordbridge AAC">
-<meta property="og:description" content="A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there.">
+<meta property="og:description" content="Wordbridge AAC is a free, open source communication app built around a consistent grid. Words keep their place as vocabulary grows, so communication becomes about finding the right word, not learning where it moved.">
 <meta property="og:url" content="https://wordbridgeaac.com/">
 <meta property="og:image" content="https://wordbridgeaac.com/screenshot.png">
 <meta property="og:image:alt" content="The Wordbridge AAC talking grid on a tablet.">
@@ -23,6 +23,31 @@
 
 <style>
 :root { --badge-h: clamp(2.35rem, 2.9vw, 2.9rem); }
+
+.terms {
+  margin: clamp(.7rem, 1.8vh, 1.05rem) 0 0;
+  font-size: .92rem;
+  font-weight: 560;
+  color: var(--fg-muted);
+}
+
+/* Under the badges, and deliberately not shaped like one. Reading the source
+   is not a third place to install the app from. */
+.source {
+  display: inline-flex;
+  align-items: center;
+  margin-top: clamp(.9rem, 2.2vh, 1.4rem);
+  padding: .55rem 1.05rem;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: .94rem;
+  font-weight: 560;
+}
+
+.source:hover { border-color: var(--accent); color: var(--accent); }
+.source:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
 /* One screen. `dvh` so a mobile browser's collapsing toolbar does not crop
    the badges, which are the only thing on the page that has to be reachable. */
@@ -117,13 +142,18 @@
       </svg>
       Wordbridge AAC
     </span>
+    <nav class="nav" aria-label="Site">
+      <a href="/about">About</a>
+      <a href="/support">Support</a>
+    </nav>
   </header>
 
   <main class="hero" id="main">
 
     <div class="pitch">
-      <h1>Every word keeps its place</h1>
-      <p class="lead">A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there, so reaching a word becomes a movement rather than a search.</p>
+      <h1>Speak with muscle memory</h1>
+      <p class="lead">Wordbridge AAC is a free, open source communication app built around a consistent grid. Words keep their place as vocabulary grows, so communication becomes about finding the right word, not learning where it moved.</p>
+      <p class="terms">Free. Open source. No subscription.</p>
 
       <ul class="badges">
         <!--
@@ -146,6 +176,8 @@
           </a>
         </li>
       </ul>
+
+      <a class="source" href="https://github.com/sheyaln/wordbridge-flutter">View source on GitHub</a>
     </div>
 
     <div class="shot">
@@ -161,8 +193,6 @@
   <footer class="colophon">
     <p>Free and open source under the MIT license.</p>
     <p>This app was developed with the assistance of generative AI.</p>
-    <p><a href="/about">About</a></p>
-    <p><a href="/support">Support</a></p>
     <p><a href="https://github.com/sheyaln/wordbridge-flutter">Source on GitHub</a></p>
   </footer>
 

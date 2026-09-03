@@ -59,9 +59,32 @@ body {
 
 .masthead {
   display: flex;
+  flex-wrap: wrap;
   align-items: baseline;
-  gap: .6rem;
+  justify-content: space-between;
+  gap: .5rem 1.5rem;
   flex: none;
+}
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2.5vw, 1.75rem);
+  font-size: .92rem;
+}
+
+.nav a {
+  color: var(--fg-muted);
+  text-decoration: none;
+  text-underline-offset: 3px;
+}
+
+.nav a:hover { color: var(--fg); text-decoration: underline; }
+.nav a[aria-current="page"] { color: var(--fg); }
+.nav a:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 3px;
 }
 
 .mark {

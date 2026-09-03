@@ -25,14 +25,14 @@ jobs:
       # html-validate is HTML5 aware and runs straight from npx, so nothing is
       # vendored into the repo. Config lives in .htmlvalidate.json.
       - name: Validate HTML
-        run: npx --yes html-validate@9 index.html about.html support.html
+        run: npx --yes html-validate@9 index.html about.html support.html privacy.html
 
       # Every page must stay droppable into any bucket: no CDN, no remote fonts,
       # no remote images. Only anchor hrefs may point off site, and site.css is
       # the one stylesheet, which is why the link check allows a relative href.
       - name: Assert the pages are self contained
         run: |
-          if grep -nEi 'src="https?://|<link[^>]+href="https?://|@import|<script[^>]+src=' index.html about.html support.html; then
+          if grep -nEi 'src="https?://|<link[^>]+href="https?://|@import|<script[^>]+src=' index.html about.html support.html privacy.html; then
             echo "::error::External asset reference found. The pages must stay self contained."
             exit 1
           fi
@@ -46,7 +46,7 @@ jobs:
       # on one page is the page somebody reads.
       - name: Assert every page carries the generative AI disclaimer
         run: |
-          for page in index.html about.html support.html; do
+          for page in index.html about.html support.html privacy.html; do
             grep -q 'developed with the assistance of generative AI' "$page" \
               || { echo "::error file=$page::Missing the generative AI disclaimer."; exit 1; }
           done
@@ -56,6 +56,7 @@ jobs:
           test -f index.html
           test -f about.html
           test -f support.html
+          test -f privacy.html
           test -f site.css
           test -f screenshot.png
           test -f screenshot.webp
@@ -109,7 +110,7 @@ jobs:
       - name: Stage site
         run: |
           mkdir -p _site
-          cp index.html about.html support.html site.css screenshot.png screenshot.webp appstore-badge.svg googleplay-badge.png CNAME _site/
+          cp index.html about.html support.html privacy.html site.css screenshot.png screenshot.webp appstore-badge.svg googleplay-badge.png CNAME _site/
 
       - uses: actions/upload-pages-artifact@v3
         with:

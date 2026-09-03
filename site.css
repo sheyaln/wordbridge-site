@@ -138,6 +138,10 @@ h1 {
 
 .prose > .lead { margin-bottom: clamp(1.5rem, 3.5vh, 2.25rem); }
 
+/* Anything standing outside a section keeps the same measure the rail's
+   text column has, or an intro runs the full width while the body does not. */
+.prose > p { max-width: 38rem; }
+
 /* Each section is its own heading and its own text. Wide enough, the heading
    moves into a rail beside the text and stays there while that section is
    read: the width gets used for orientation instead of being left empty, and

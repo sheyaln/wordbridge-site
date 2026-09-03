@@ -238,3 +238,19 @@ h1 {
 .colophon a { color: inherit; text-underline-offset: 2px; }
 .colophon a:hover { color: var(--fg); }
 .colophon a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Ko-fi injects its floating button inside an iframe, and the iframe element's
+   own background is white — a rectangle painted over whatever the button
+   happens to sit on, which here is the colophon. The button inside it is
+   already the color it was configured with; only its backdrop is wrong.
+   `!important` because the widget sets these inline. */
+.floatingchat-container-wrap,
+.floatingchat-container-wrap-mobi,
+.floating-chat-kofi-popup-iframe,
+.floating-chat-kofi-popup-iframe-mobi,
+#kofi-widget-overlay,
+iframe[src*="ko-fi"] {
+  background: transparent !important;
+  background-color: transparent !important;
+  color-scheme: normal;
+}

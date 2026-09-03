@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Support for Wordbridge AAC</title>
+<meta name="description" content="Email support@wordbridgeaac.com with anything about Wordbridge AAC.">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Support for Wordbridge AAC">
+<meta property="og:description" content="Email support@wordbridgeaac.com with anything about Wordbridge AAC.">
+<meta property="og:url" content="https://wordbridgeaac.com/support">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234a3d8f'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='6' width='8' height='8' rx='1.5'/%3E%3Crect x='18' y='6' width='8' height='8' rx='1.5'/%3E%3Crect x='6' y='18' width='8' height='8' rx='1.5'/%3E%3Crect x='18' y='18' width='8' height='8' rx='1.5' fill-opacity='.35'/%3E%3C/g%3E%3C/svg%3E">
+
+<link rel="stylesheet" href="site.css">
+
+<style>
+.body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(1.75rem, 4.5vh, 3rem);
+  min-height: 0;
+  padding: clamp(1rem, 3vh, 2rem) 0;
+}
+
+/* The address is the whole page, so it is set as the largest thing on it and
+   sized to wrap on a narrow screen rather than push the layout sideways. */
+.address {
+  display: inline-block;
+  margin-top: clamp(1rem, 2.6vh, 1.6rem);
+  font-size: clamp(1.35rem, 1rem + 1.9vw, 2.35rem);
+  font-weight: 660;
+  letter-spacing: -.02em;
+  line-height: 1.2;
+  color: var(--accent);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+
+.address:hover { text-decoration: underline; text-underline-offset: .12em; text-decoration-thickness: .06em; }
+.address:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 6px; }
+
+.detail {
+  max-width: 34rem;
+  padding: clamp(1.1rem, 2.6vh, 1.6rem) clamp(1.1rem, 3vw, 1.75rem);
+  background: var(--bg-alt);
+  border: 1px solid var(--rule);
+  border-radius: clamp(8px, 1vw, 14px);
+}
+
+.detail h2 {
+  margin: 0 0 .5rem;
+  font-size: .78rem;
+  font-weight: 660;
+  letter-spacing: .09em;
+  text-transform: uppercase;
+  color: var(--fg-muted);
+}
+
+.detail p { margin: 0 0 .85rem; color: var(--fg-muted); }
+
+.detail ul {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+}
+
+.detail li { text-wrap: pretty; }
+</style>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="page">
+
+  <header class="masthead">
+    <a class="mark" href="/">
+      <svg viewBox="0 0 32 32" role="img" aria-hidden="true" focusable="false">
+        <rect width="32" height="32" rx="6" style="fill: var(--accent)"/>
+        <g fill="#fff">
+          <rect x="6" y="6" width="8" height="8" rx="1.5"/>
+          <rect x="18" y="6" width="8" height="8" rx="1.5"/>
+          <rect x="6" y="18" width="8" height="8" rx="1.5"/>
+          <rect x="18" y="18" width="8" height="8" rx="1.5" fill-opacity=".35"/>
+        </g>
+      </svg>
+      Wordbridge AAC
+    </a>
+  </header>
+
+  <main class="body" id="main">
+
+    <div>
+      <h1>Support</h1>
+      <p class="lead">Something broken, a word that will not behave, a question about setting a board up. It all goes to one address.</p>
+      <a class="address" href="mailto:support@wordbridgeaac.com">support@wordbridgeaac.com</a>
+    </div>
+
+    <div class="detail">
+      <h2>What to include</h2>
+      <p>Whatever you have is enough to start. These four make the answer faster:</p>
+      <ul>
+        <li>What you were doing when it happened</li>
+        <li>What happened instead</li>
+        <li>The device, and which version of its system it runs</li>
+        <li>The app version, from Settings, then About</li>
+      </ul>
+    </div>
+
+  </main>
+
+  <footer class="colophon">
+    <p>Free and open source under the MIT license.</p>
+    <p>This app was developed with the assistance of generative AI.</p>
+    <p><a href="/">wordbridgeaac.com</a></p>
+    <p><a href="/about">About</a></p>
+    <p><a href="https://github.com/sheyaln/wordbridge-flutter">Source on GitHub</a></p>
+  </footer>
+
+</div>
+
+</body>
+</html>

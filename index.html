@@ -3,98 +3,29 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>wordbridge, a free and open source AAC app</title>
+<title>Wordbridge AAC, a free and open source communication app</title>
 <meta name="description" content="A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there.">
 <meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#101014" media="(prefers-color-scheme: dark)">
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="wordbridge">
+<meta property="og:title" content="Wordbridge AAC">
 <meta property="og:description" content="A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there.">
 <meta property="og:url" content="https://wordbridgeaac.com/">
 <meta property="og:image" content="https://wordbridgeaac.com/screenshot.png">
-<meta property="og:image:alt" content="The wordbridge talking grid on a tablet.">
+<meta property="og:image:alt" content="The Wordbridge AAC talking grid on a tablet.">
 <meta name="twitter:card" content="summary_large_image">
 
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%234a3d8f'/%3E%3Cg fill='%23fff'%3E%3Crect x='6' y='6' width='8' height='8' rx='1.5'/%3E%3Crect x='18' y='6' width='8' height='8' rx='1.5'/%3E%3Crect x='6' y='18' width='8' height='8' rx='1.5'/%3E%3Crect x='18' y='18' width='8' height='8' rx='1.5' fill-opacity='.35'/%3E%3C/g%3E%3C/svg%3E">
 
+<link rel="stylesheet" href="site.css">
+
 <style>
-:root {
-  --bg: #ffffff;
-  --bg-alt: #f6f6f3;
-  --fg: #16161a;
-  --fg-muted: #52525e;
-  --rule: #e0e0da;
-  --accent: #4a3d8f;
-  --shadow: 0 1px 2px rgba(20, 20, 30, .06), 0 18px 48px rgba(20, 20, 30, .14);
-  --badge-h: clamp(2.35rem, 2.9vw, 2.9rem);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #101014;
-    --bg-alt: #191920;
-    --fg: #ececee;
-    --fg-muted: #a8a8b4;
-    --rule: #2c2c35;
-    --accent: #b3a6ff;
-    --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 18px 48px rgba(0, 0, 0, .55);
-  }
-}
-
-*, *::before, *::after { box-sizing: border-box; }
-
-html { -webkit-text-size-adjust: 100%; }
-
-body {
-  margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.55;
-  text-rendering: optimizeLegibility;
-}
-
-.skip {
-  position: absolute;
-  left: -9999px;
-  top: 0;
-  padding: .6rem 1rem;
-  background: var(--accent);
-  color: #fff;
-  z-index: 10;
-}
-.skip:focus { left: .5rem; top: .5rem; }
+:root { --badge-h: clamp(2.35rem, 2.9vw, 2.9rem); }
 
 /* One screen. `dvh` so a mobile browser's collapsing toolbar does not crop
    the badges, which are the only thing on the page that has to be reachable. */
-.page {
-  min-height: 100dvh;
-  display: flex;
-  flex-direction: column;
-  padding: clamp(1rem, 2.2vh, 2rem) clamp(1.25rem, 4vw, 3.5rem);
-  gap: clamp(.75rem, 2vh, 1.75rem);
-}
-
-.masthead {
-  display: flex;
-  align-items: baseline;
-  gap: .6rem;
-  flex: none;
-}
-
-.mark {
-  display: inline-flex;
-  align-items: center;
-  gap: .55rem;
-  font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem);
-  font-weight: 640;
-  letter-spacing: -.015em;
-}
-
-.mark svg { width: 1.35em; height: 1.35em; flex: none; }
-
 .hero {
   flex: 1 1 auto;
   display: grid;
@@ -113,23 +44,6 @@ body {
 }
 
 .pitch { min-width: 0; }
-
-h1 {
-  margin: 0 0 clamp(.6rem, 1.6vh, 1rem);
-  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.4rem);
-  line-height: 1.08;
-  letter-spacing: -.028em;
-  font-weight: 680;
-  text-wrap: balance;
-}
-
-.thesis {
-  margin: 0;
-  font-size: clamp(1rem, .95rem + .35vw, 1.2rem);
-  color: var(--fg-muted);
-  max-width: 34rem;
-  text-wrap: pretty;
-}
 
 .shot {
   min-width: 0;
@@ -176,23 +90,6 @@ h1 {
 }
 .badge:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 9px; }
 
-.colophon {
-  flex: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: .4rem 1.1rem;
-  align-items: baseline;
-  padding-top: clamp(.6rem, 1.6vh, 1.1rem);
-  border-top: 1px solid var(--rule);
-  font-size: .82rem;
-  color: var(--fg-muted);
-}
-
-.colophon p { margin: 0; }
-.colophon a { color: inherit; text-underline-offset: 2px; }
-.colophon a:hover { color: var(--fg); }
-.colophon a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
-
 /* A short landscape window cannot hold a masthead image and stay legible, so
    below this the page scrolls rather than shrinking the screenshot to nothing. */
 @media (max-height: 30rem) and (min-width: 62rem) {
@@ -218,7 +115,7 @@ h1 {
           <rect x="18" y="18" width="8" height="8" rx="1.5" fill-opacity=".35"/>
         </g>
       </svg>
-      wordbridge
+      Wordbridge AAC
     </span>
   </header>
 
@@ -226,7 +123,7 @@ h1 {
 
     <div class="pitch">
       <h1>Every word keeps its place</h1>
-      <p class="thesis">A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there, so reaching a word becomes a movement rather than a search.</p>
+      <p class="lead">A free, open source AAC app. Every word has a permanent place on the grid, and adding vocabulary never moves what is already there, so reaching a word becomes a movement rather than a search.</p>
 
       <ul class="badges">
         <!--
@@ -255,7 +152,7 @@ h1 {
       <picture>
         <source srcset="screenshot.webp" type="image/webp">
         <img src="screenshot.png" width="1600" height="1027" decoding="async" fetchpriority="high"
-             alt="The wordbridge talking grid on a tablet. Colored cells each hold one word and one picture, grouped under headings reading who, which one, doing, word endings, joining words, things, where, and yes, no and more. A strip of predicted words sits above the grid, and a number of cells sit empty, held for words that go in later.">
+             alt="The Wordbridge AAC talking grid on a tablet. Colored cells each hold one word and one picture, grouped under headings reading who, which one, doing, word endings, joining words, things, where, and yes, no and more. A strip of predicted words sits above the grid, and a number of cells sit empty, held for words that go in later.">
       </picture>
     </div>
 
@@ -263,7 +160,9 @@ h1 {
 
   <footer class="colophon">
     <p>Free and open source under the MIT license.</p>
-    <p>Bundled picture sets carry their own terms, credited inside the app.</p>
+    <p>This app was developed with the assistance of generative AI.</p>
+    <p><a href="/about">About</a></p>
+    <p><a href="/support">Support</a></p>
     <p><a href="https://github.com/sheyaln/wordbridge-flutter">Source on GitHub</a></p>
   </footer>
 

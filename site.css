@@ -1,0 +1,170 @@
+/* The shell every page shares: color, type, the masthead and the colophon.
+   Kept in one file because four pages that are meant to look like one site
+   drift apart the moment each carries its own copy of the tokens. Page
+   specific layout stays inline in the page it belongs to. */
+
+:root {
+  --bg: #ffffff;
+  --bg-alt: #f6f6f3;
+  --fg: #16161a;
+  --fg-muted: #52525e;
+  --rule: #e0e0da;
+  --accent: #4a3d8f;
+  --shadow: 0 1px 2px rgba(20, 20, 30, .06), 0 18px 48px rgba(20, 20, 30, .14);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #101014;
+    --bg-alt: #191920;
+    --fg: #ececee;
+    --fg-muted: #a8a8b4;
+    --rule: #2c2c35;
+    --accent: #b3a6ff;
+    --shadow: 0 1px 2px rgba(0, 0, 0, .5), 0 18px 48px rgba(0, 0, 0, .55);
+  }
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.55;
+  text-rendering: optimizeLegibility;
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  padding: .6rem 1rem;
+  background: var(--accent);
+  color: #fff;
+  z-index: 10;
+}
+.skip:focus { left: .5rem; top: .5rem; }
+
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 2.2vh, 2rem) clamp(1.25rem, 4vw, 3.5rem);
+  gap: clamp(.75rem, 2vh, 1.75rem);
+}
+
+.masthead {
+  display: flex;
+  align-items: baseline;
+  gap: .6rem;
+  flex: none;
+}
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-size: clamp(1.05rem, .95rem + .5vw, 1.35rem);
+  font-weight: 640;
+  letter-spacing: -.015em;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.mark:hover { color: var(--accent); }
+a.mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.mark svg { width: 1.35em; height: 1.35em; flex: none; }
+
+h1 {
+  margin: 0 0 clamp(.6rem, 1.6vh, 1rem);
+  font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.4rem);
+  line-height: 1.08;
+  letter-spacing: -.028em;
+  font-weight: 680;
+  text-wrap: balance;
+}
+
+.lead {
+  margin: 0;
+  font-size: clamp(1rem, .95rem + .35vw, 1.2rem);
+  color: var(--fg-muted);
+  max-width: 34rem;
+  text-wrap: pretty;
+}
+
+/* Long form pages. One column, measured for reading rather than for filling
+   the window, because these two are read start to finish and the rest of the
+   site is not. */
+.prose {
+  flex: 1 1 auto;
+  width: 100%;
+  max-width: 38rem;
+  padding: clamp(1.5rem, 5vh, 3.5rem) 0;
+}
+
+.prose h1 { max-width: 20ch; }
+
+.prose > .lead { margin-bottom: clamp(1.75rem, 4vh, 2.75rem); }
+
+.prose h2 {
+  margin: clamp(2rem, 5vh, 3rem) 0 .65rem;
+  font-size: clamp(1.15rem, 1rem + .5vw, 1.4rem);
+  font-weight: 660;
+  letter-spacing: -.015em;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.prose h3 {
+  margin: clamp(1.4rem, 3vh, 2rem) 0 .4rem;
+  font-size: 1rem;
+  font-weight: 640;
+  letter-spacing: -.005em;
+}
+
+.prose p, .prose li { text-wrap: pretty; }
+.prose p { margin: 0 0 .95rem; }
+
+.prose ul {
+  margin: 0 0 1.1rem;
+  padding-left: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+
+.prose strong { font-weight: 640; }
+
+.prose a { color: var(--accent); text-underline-offset: 2px; }
+.prose a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 3px; }
+
+/* The dated line at the top of a policy, and anything else that is a fact
+   about the document rather than part of it. */
+.stamp {
+  margin: 0 0 clamp(1.5rem, 3.5vh, 2.25rem);
+  padding-bottom: .8rem;
+  border-bottom: 1px solid var(--rule);
+  font-size: .82rem;
+  color: var(--fg-muted);
+}
+
+.colophon {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1.1rem;
+  align-items: baseline;
+  padding-top: clamp(.6rem, 1.6vh, 1.1rem);
+  border-top: 1px solid var(--rule);
+  font-size: .82rem;
+  color: var(--fg-muted);
+}
+
+.colophon p { margin: 0; }
+.colophon a { color: inherit; text-underline-offset: 2px; }
+.colophon a:hover { color: var(--fg); }
+.colophon a:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }

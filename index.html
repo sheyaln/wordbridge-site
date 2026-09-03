@@ -50,6 +50,32 @@
 .source:hover { border-color: var(--accent); color: var(--accent); }
 .source:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 
+/* Ko-fi's own button is a fixed overlay that cannot be placed in the layout,
+   so this is the same destination as a control that can. Ko-fi's colors, so
+   somebody who has seen the button elsewhere recognizes it. */
+.support {
+  /* `flex` rather than `inline-flex`: it is a block, so it starts its own line
+     under the source button instead of sitting beside it, and `fit-content`
+     keeps it hugging its label rather than spanning the column. */
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  gap: .55rem;
+  margin-top: .7rem;
+  padding: .55rem 1.15rem;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: #323842;
+  color: #fff;
+  text-decoration: none;
+  font-size: .94rem;
+  font-weight: 600;
+}
+
+.support svg { width: 1.15em; height: 1.15em; flex: none; }
+.support:hover { background: #434b58; }
+.support:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
 /* One screen. `dvh` so a mobile browser's collapsing toolbar does not crop
    the badges, which are the only thing on the page that has to be reachable. */
 .hero {
@@ -182,6 +208,12 @@
       </ul>
 
       <a class="source" href="https://github.com/sheyaln/wordbridge-flutter">View source on GitHub</a>
+      <a class="support" href="https://ko-fi.com/wordbridgeaac">
+        <svg viewBox="0 0 24 24" width="24" height="24" aria-hidden="true" focusable="false">
+          <path fill="currentColor" d="M4 4h13a4 4 0 0 1 0 8h-1.1A6 6 0 0 1 10 17H8a6 6 0 0 1-6-6V4Zm13 6a2 2 0 0 0 0-4h-1v4h1ZM3 19h15v2H3v-2Z"/>
+        </svg>
+        Support Us
+      </a>
     </div>
 
     <div class="shot">
@@ -201,16 +233,6 @@
   </footer>
 
 </div>
-
-<script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
-<script>
-  kofiWidgetOverlay.draw('wordbridgeaac', {
-    'type': 'floating-chat',
-    'floating-chat.donateButton.text': 'Support Us',
-    'floating-chat.donateButton.background-color': '#323842',
-    'floating-chat.donateButton.text-color': '#fff'
-  });
-</script>
 
 </body>
 </html>

@@ -30,15 +30,9 @@ jobs:
       # Every page must stay droppable into any bucket: no CDN, no remote fonts,
       # no remote images. Only anchor hrefs may point off site, and site.css is
       # the one stylesheet, which is why the link check allows a relative href.
-      #
-      # One exception, named rather than implied: the Ko-fi overlay is served
-      # from storage.ko-fi.com and cannot be vendored. It is a donate button on
-      # a marketing site, not anything the app does, and it is the only host
-      # allowed to appear. Anything else still fails.
       - name: Assert the pages are self contained
         run: |
-          if grep -nEi 'src="https?://|<link[^>]+href="https?://|@import|<script[^>]+src=' index.html about.html support.html privacy.html \
-             | grep -v 'storage\.ko-fi\.com'; then
+          if grep -nEi 'src="https?://|<link[^>]+href="https?://|@import|<script[^>]+src=' index.html about.html support.html privacy.html; then
             echo "::error::External asset reference found. The pages must stay self contained."
             exit 1
           fi

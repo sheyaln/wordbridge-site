@@ -100,7 +100,16 @@ body {
 
 a.mark:hover { color: var(--accent); }
 a.mark:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
-.mark svg { width: 1.35em; height: 1.35em; flex: none; }
+/* The logo is black and blue on transparent, which vanishes on a dark
+   ground, so it sits on a white chip in both themes — the same white the
+   app icon is composited onto. */
+.mark img {
+  width: 1.7em;
+  height: 1.7em;
+  flex: none;
+  background: #fff;
+  border-radius: 22%;
+}
 
 h1 {
   margin: 0 0 clamp(.6rem, 1.6vh, 1rem);

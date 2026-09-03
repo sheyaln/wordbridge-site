@@ -58,6 +58,8 @@ jobs:
           test -f support.html
           test -f privacy.html
           test -f site.css
+          test -f favicon.png
+          test -f icon-180.png
           test -f screenshot.png
           test -f screenshot.webp
           test -f appstore-badge.svg
@@ -110,7 +112,7 @@ jobs:
       - name: Stage site
         run: |
           mkdir -p _site
-          cp index.html about.html support.html privacy.html site.css screenshot.png screenshot.webp appstore-badge.svg googleplay-badge.png CNAME _site/
+          cp index.html about.html support.html privacy.html site.css favicon.png icon-180.png screenshot.png screenshot.webp appstore-badge.svg googleplay-badge.png CNAME _site/
 
       - uses: actions/upload-pages-artifact@v3
         with:

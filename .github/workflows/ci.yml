@@ -40,7 +40,12 @@ jobs:
       # The address on the support page is the store listing's support contact,
       # so a typo in it is a family with nowhere to write.
       - name: Assert the support address is intact
-        run: grep -q 'mailto:support@wordbridgeaac.com' support.html
+        run: |
+          grep -q 'mailto:support@wordbridgeaac.com' support.html
+          # The visible copy is split by a <wbr> so it breaks at the @ instead
+          # of orphaning the last letter of .com, so it can rot independently
+          # of the href. Both halves have to still spell the address.
+          grep -q '>support@<wbr>wordbridgeaac\.com<' support.html
 
       # Said in the app, in the README, and here. A footer that quietly loses it
       # on one page is the page somebody reads.

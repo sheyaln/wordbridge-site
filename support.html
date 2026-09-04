@@ -43,18 +43,26 @@
   }
 }
 
-/* The address is the whole page, so it is set as the largest thing on it and
-   sized to wrap on a narrow screen rather than push the layout sideways. */
+/* The address is sized against the column it sits in rather than the viewport.
+   Past 56rem the column is the narrower half of a grid, so a viewport-derived
+   size overshoots it and drops the last letter or two onto a second line. */
+.intro { container-type: inline-size; }
+
+/* The address is the whole page, so it is set as the largest thing on it. The
+   string is 12.9em wide at this weight and tracking, so it clears its column on
+   one line up to 7.7cqi; 6.8 keeps a margin for the system font the platform
+   actually picks. Narrower than the 1.25rem floor, the `<wbr>` takes the break
+   at the @ rather than leaving the last letter of .com on its own line. */
 .address {
   display: inline-block;
   margin-top: clamp(1rem, 2.6vh, 1.6rem);
-  font-size: clamp(1.35rem, 1rem + 1.9vw, 2.35rem);
+  font-size: clamp(1.25rem, 6.8cqi, 2.35rem);
   font-weight: 660;
   letter-spacing: -.02em;
   line-height: 1.2;
   color: var(--accent);
   text-decoration: none;
-  overflow-wrap: anywhere;
+  overflow-wrap: break-word;
 }
 
 .address:hover { text-decoration: underline; text-underline-offset: .12em; text-decoration-thickness: .06em; }
@@ -110,10 +118,10 @@
 
   <main class="body" id="main">
 
-    <div>
+    <div class="intro">
       <h1>Support</h1>
       <p class="lead">Something broken, a word that will not behave, a question about setting a board up. It all goes to one address.</p>
-      <a class="address" href="mailto:support@wordbridgeaac.com">support@wordbridgeaac.com</a>
+      <a class="address" href="mailto:support@wordbridgeaac.com">support@<wbr>wordbridgeaac.com</a>
     </div>
 
     <div class="detail">

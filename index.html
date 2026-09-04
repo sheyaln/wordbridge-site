@@ -151,6 +151,27 @@
 }
 .badge:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 9px; }
 
+/* Under the Play badge and attached to it, because it is the same answer to
+   the same question — how do I get this on an Android tablet — for the people
+   Play cannot reach. Small and quiet: Play is the right route for almost
+   everyone, and a download that looked like a third store button would send
+   people down a path that cannot later be updated from Play. */
+.apk {
+  display: block;
+  margin-top: .4rem;
+  font-size: .82rem;
+  color: var(--muted);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule);
+  width: fit-content;
+}
+.apk:hover { color: var(--accent); border-color: var(--accent); }
+.apk:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+/* The badges share a baseline, which the extra line under one of them would
+   otherwise break. */
+.badges { align-items: flex-start; }
+
 /* A short landscape window cannot hold a masthead image and stay legible, so
    below this the page scrolls rather than shrinking the screenshot to nothing. */
 @media (max-height: 30rem) and (min-width: 62rem) {
@@ -197,6 +218,13 @@
           <!-- Google Play listing URL goes in href -->
           <a class="badge badge-play" href="#" aria-label="Get it on Google Play">
             <img src="googleplay-badge.png" width="646" height="250" alt="" decoding="async">
+          </a>
+          <!--
+            GitHub resolves latest/download/<name> to the newest release's
+            asset of that name, so this link never needs editing again.
+          -->
+          <a class="apk" href="https://github.com/sheyaln/wordbridge-flutter/releases/latest/download/wordbridge.apk">
+            Or download the APK
           </a>
         </li>
         <li>

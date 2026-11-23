@@ -55,7 +55,7 @@
   <main class="prose" id="main">
 
     <h1>Wordbridge AAC Privacy Policy</h1>
-    <p class="stamp">Effective date: September 3, 2026</p>
+    <p class="stamp">Effective date: September 12, 2026</p>
 
     <p class="lead">Wordbridge AAC (&ldquo;Wordbridge AAC&rdquo;) is an augmentative and alternative communication (AAC) application designed to help people communicate in ways that work for them. We believe communication data is deeply personal. Wordbridge AAC is designed to keep that data on the device whenever possible.</p>
 
@@ -84,6 +84,7 @@
           <li>Your caregiver PIN</li>
           <li>Your local usage history</li>
         </ul>
+        <p>This remains true when cloud backups are switched on. A backup copied to your own iCloud or Google account is not transmitted to us: it goes from your device to your account, and we have no access to it. See Section 2 → Backups.</p>
         <p>These things may be processed or stored locally by the app because they are necessary for its functionality, but they are not transmitted to us as the developers.</p>
         <p>We do not use this information for advertising, sell it to advertisers, or use it to create advertising profiles.</p>
       </div>
@@ -127,7 +128,19 @@
 
         <h3>Backups</h3>
         <p>Wordbridge AAC can create a backup of its local database within the app's device storage. A backup contains the locally stored app data, including usage history.</p>
-        <p>Your device's operating-system backup service may independently copy application data to a service such as iCloud or Google backup, depending on your device settings. Those backups are controlled by your device and its operating system, not by Wordbridge AAC.</p>
+
+        <h4>Copies in your own iCloud or Google account</h4>
+        <p>Wordbridge AAC can also keep copies of those backups in the cloud account already signed in on your device. This is offered once, during setup, and can be turned on or off at any time in Settings → Backups. Devices set up before this feature existed are not switched on by an update.</p>
+        <p>These copies go to <em>your</em> account, not to us:</p>
+        <ul>
+          <li>On iPad and iPhone, either to Wordbridge AAC's own folder in your iCloud Drive, using the iCloud account signed in on the device, or to a folder you choose once through your device's own folder picker — your Google Drive, Dropbox, OneDrive, or the device's own storage. You choose which under Settings → Backups; iCloud is the default.</li>
+          <li>On Android, to a folder you choose once through your device's own document picker — your Google Drive, another cloud provider you have installed, or the device's own storage.</li>
+        </ul>
+        <p><strong>We never receive these copies and cannot read them.</strong> There is no Wordbridge AAC server involved and no Wordbridge AAC account. Wordbridge AAC holds no credentials for your iCloud, Google, Dropbox or Microsoft account. Where copies go to Wordbridge AAC's own iCloud folder, the operating system grants the app a private folder inside your own iCloud storage. Where you choose a folder instead, on either platform, your device grants the app permission to that one folder and nothing else — the app never signs in to the provider and never sees the rest of your files. The copies count against your own cloud storage and are governed by that provider's privacy policy for your account, not by ours.</p>
+        <p>If you change where the copies go, copies already in the old place are left there: Wordbridge AAC does not move them and does not delete them. It tells you that before the change and keeps saying where they are under Settings → Backups, so you can delete them yourself. See Section 8.</p>
+        <p>A copy is the same file as the backup on the device: the complete app database, including usage history. As described under &ldquo;Usage history&rdquo; above, usage history records locations and times rather than words, but someone with access to both the history and the board could reconstruct some communication patterns. Anyone who can sign in to your cloud account can open these copies. Choose the account accordingly, and see Section 8 for how to delete them.</p>
+        <p>Copies are made when the app opens (at most once a day), when an app update changes how the board is stored, and when you press &ldquo;Back up now&rdquo;. Wordbridge AAC keeps the five most recent copies in the account and deletes older ones.</p>
+        <p>Your device's operating-system backup service may also independently copy application data to a service such as iCloud or Google backup, depending on your device settings. Those backups are separate from the copies described above, are controlled by your device and its operating system, and are not made or managed by Wordbridge AAC.</p>
         <p>If you deliberately copy a backup somewhere else, Wordbridge AAC has no access to that copy and cannot delete it.</p>
       </div>
     </section>
@@ -248,6 +261,16 @@
           <li>Word prediction: Settings → Grammar → Reset word prediction</li>
           <li>All local application data: uninstalling Wordbridge AAC removes the app's local data and local backups from the device</li>
         </ul>
+
+        <h4>Backup copies in your own cloud account</h4>
+        <p>You control these entirely, because they are in your account and not ours.</p>
+        <ul>
+          <li>Stop making new ones: Settings → Backups → turn off &ldquo;Keep a copy in…&rdquo;. Existing copies are left alone.</li>
+          <li>Delete all of them: Settings → Backups → &ldquo;Remove every copy from…&rdquo;. This deletes them from the account. The board and the backups on the device are untouched.</li>
+          <li>You can also delete them directly, from iCloud Drive or from the folder you chose, without opening Wordbridge AAC.</li>
+          <li>If you have changed where copies go, the older ones are still in the previous place. Wordbridge AAC names it under Settings → Backups. Delete them there, or point Wordbridge AAC back at that place and use &ldquo;Remove every copy from…&rdquo;.</li>
+          <li>Uninstalling Wordbridge AAC removes the app's local data and local backups from the device. It does <em>not</em> remove copies already in your cloud account — delete those first if that is what you want.</li>
+        </ul>
         <p>A copy of a backup that has been moved somewhere outside the app is not accessible to Wordbridge AAC and cannot be deleted by us.</p>
 
         <h3>Reports already sent to Wordbridge AAC</h3>
@@ -262,6 +285,7 @@
         <p>Wordbridge AAC is intended for nonspeaking people of any age, including adults. It is not designed exclusively for children.</p>
         <p>Because Wordbridge AAC may be used by people of many ages, this Privacy Policy applies regardless of the user's age.</p>
         <p>Parents, caregivers, and other responsible adults should review the app's privacy settings with the person using Wordbridge AAC when appropriate.</p>
+        <p>One setting in particular is worth reviewing together: cloud backups. When they are on, a copy of the app's data — which includes the person's boards and usage history — is kept in the caregiver's own iCloud or Google account. It is not sent to us and we cannot read it, but anyone who can sign in to that account can open it. It is chosen during setup and reversible at any time in Settings → Backups.</p>
       </div>
     </section>
 
@@ -269,7 +293,7 @@
       <h2>10. Security</h2>
       <div>
         <p>We take reasonable measures to protect information that is transmitted to and stored by Wordbridge AAC.</p>
-        <p>The design of Wordbridge AAC also minimizes the information that needs to leave the device in the first place. Communication content and most information associated with a user's board remain local rather than being transmitted to our servers.</p>
+        <p>The design of Wordbridge AAC also minimizes the information that needs to leave the device in the first place. Communication content and most information associated with a user's board remain local rather than being transmitted to our servers. Where a copy does leave the device — a cloud backup, if you have turned one on — it goes to your own account rather than to us, and is protected by that account's own sign-in and encryption.</p>
       </div>
     </section>
 
@@ -296,6 +320,7 @@
         <p>Wordbridge AAC is a communication tool. The things a person communicates can be among the most personal information they have.</p>
         <p>We therefore designed Wordbridge AAC around a simple principle: the information needed to communicate should stay with the person communicating whenever possible.</p>
         <p>When we need diagnostic information, we collect the minimum information needed to understand the technical problem rather than collecting the content of someone's communication.</p>
+        <p>Cloud backup is the same principle applied to a different failure. Families lose months of board customization when a tablet is lost or replaced, and a communication board is somebody's voice. So Wordbridge AAC helps you keep a copy — in your account, under your control, where we cannot see it — rather than becoming another party holding your data.</p>
         <p>Your communication belongs to you.</p>
       </div>
     </section>
